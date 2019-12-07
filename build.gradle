@@ -9,10 +9,12 @@ shadowJar {
   manifest {
     attributes 'Main-Class': 'com.gzatorski.jsonplaceholder.Launcher'
   }
+  mergeServiceFiles('reference.conf')
 }
 
 dependencies {
     compile 'org.scala-lang:scala-library:2.11.8'
+    compile group: 'com.typesafe', name: 'config', version: '1.4.0'
     testCompile 'org.scalatest:scalatest_2.11:3.0.4'
     testRuntime 'org.pegdown:pegdown:1.4.2'
     testRuntime 'org.scala-lang.modules:scala-xml_2.11:1.0.6'
