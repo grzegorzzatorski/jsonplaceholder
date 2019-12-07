@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'scala'
+    id 'com.github.maiflai.scalatest' version '0.19'
+    id 'com.github.johnrengelman.shadow' version '2.0.1'
+}
+
+shadowJar {
+  manifest {
+    attributes 'Main-Class': 'com.gzatorski.jsonplaceholder.Launcher'
+  }
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.8'
+    testCompile 'org.scalatest:scalatest_2.11:3.0.4'
+    testRuntime 'org.pegdown:pegdown:1.4.2'
+    testRuntime 'org.scala-lang.modules:scala-xml_2.11:1.0.6'
+}
+
+repositories {
+    jcenter()
+}
+
+wrapper {
+   gradleVersion = '4.5.1'
+}
