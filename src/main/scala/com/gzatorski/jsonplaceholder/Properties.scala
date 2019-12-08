@@ -13,6 +13,7 @@ class Properties(config: Config) {
 
   val downloadMaxPosts: Int = config.getInt("download.maxposts")
   val downloadDirectory: String = config.getString("download.directory")
+  val filesOverwite: Boolean = config.getBoolean("download.overwrite")
 
   val logDirectory: String = config.getString("log.directory")
 
