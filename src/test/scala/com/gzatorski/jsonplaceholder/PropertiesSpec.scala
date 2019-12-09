@@ -5,8 +5,8 @@ import org.scalatest.{Matchers, WordSpecLike}
 
 class PropertiesSpec extends Matchers with WordSpecLike {
 
-  val configPath = getClass.getResource("/application.conf").getPath
-  val props = Properties(configPath)
+  private val configPath = getClass.getResource("/application.conf").getPath
+  private val props = Properties(configPath)
 
 
   "Properties" should {

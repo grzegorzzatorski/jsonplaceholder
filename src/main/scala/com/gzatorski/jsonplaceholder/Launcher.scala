@@ -20,7 +20,7 @@ object Launcher extends LazyLogging {
     logger.info("Starting up")
 
     val properties = Properties("properties.conf")
-    implicit val ac = ActorSystem("json-placeholder")
+    implicit val ac: ActorSystem = ActorSystem("json-placeholder")
 
     val client = new JSONPlaceholderClient(ac)
 

@@ -1,5 +1,6 @@
-package com.gzatorski.jsonplaceholder.model
+package model
 
+import com.gzatorski.jsonplaceholder.model.{JsonParser, Post}
 import org.scalatest.{Matchers, WordSpecLike}
 
 class JsonParserSpec extends Matchers with WordSpecLike {

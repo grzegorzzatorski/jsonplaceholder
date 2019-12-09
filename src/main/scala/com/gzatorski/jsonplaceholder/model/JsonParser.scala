@@ -5,7 +5,7 @@ import DefaultJsonProtocol._
 
 object JsonParser {
 
-  def getAsPosts(content: String) = {
+  def getAsPosts(content: String): List[Post] = {
     implicit val postFormat: JsonFormat[Post] = jsonFormat4(Post)
 
     if (content.isEmpty) {

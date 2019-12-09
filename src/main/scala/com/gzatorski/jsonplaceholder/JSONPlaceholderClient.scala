@@ -16,8 +16,8 @@ import scala.concurrent.Future
 
 class JSONPlaceholderClient(ac: ActorSystem) extends LazyLogging {
 
-  implicit val actorSystem = ac
-  implicit val materializer = ActorMaterializer()
+  implicit val actorSystem: ActorSystem = ac
+  implicit val materializer: ActorMaterializer = ActorMaterializer()
 
   def getAllPosts(requestURL: String): Future[List[Post]] = {
     val httpRequest = HttpRequest(uri = requestURL)

@@ -9,7 +9,7 @@ import spray.json._
 object PostWriter extends FileWriter with LazyLogging {
 
   def writePosts(posts: List[Post], directory: String, overwrite: Boolean): Unit = {
-    implicit val postFormat = jsonFormat4(Post)
+    implicit val postFormat: RootJsonFormat[Post] = jsonFormat4(Post)
     posts.foreach { post =>
       val json = post.toJson
       val jsonPretty = json.prettyPrint
@@ -17,9 +17,9 @@ object PostWriter extends FileWriter with LazyLogging {
 
       try {
         writeFile(writePath, jsonPretty, overwrite)
-        logger.trace(s"File ${writePath} has been saved")
+        logger.trace(s"File $writePath has been saved")
       } catch {
-        case e: FileAlreadyExistsException =>
+        case _: FileAlreadyExistsException =>
           logger.error(s"File $writePath already exists. " +
             s"If you want to overwrite it, please set download.overwrite=true in application.conf")
       }
