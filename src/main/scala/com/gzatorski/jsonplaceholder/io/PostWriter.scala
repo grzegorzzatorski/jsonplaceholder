@@ -2,11 +2,11 @@ package com.gzatorski.jsonplaceholder.io
 
 import com.gzatorski.jsonplaceholder.model.Post
 import java.nio.file.FileAlreadyExistsException
+import com.typesafe.scalalogging.LazyLogging
 import spray.json.DefaultJsonProtocol._
 import spray.json._
 
-object PostWriter extends FileWriter {
-
+object PostWriter extends FileWriter with LazyLogging {
 
   def writePosts(posts: List[Post], directory: String, overwrite: Boolean): Unit = {
     implicit val postFormat = jsonFormat4(Post)
@@ -17,9 +17,11 @@ object PostWriter extends FileWriter {
 
       try {
         writeFile(writePath, jsonPretty, overwrite)
+        logger.trace(s"File ${writePath} has been saved")
       } catch {
-        case e: FileAlreadyExistsException => println(s"File $writePath already exists. " +
-          s"If you want to overwrite it, please set download.overwrite=true in application.conf")
+        case e: FileAlreadyExistsException =>
+          logger.error(s"File $writePath already exists. " +
+            s"If you want to overwrite it, please set download.overwrite=true in application.conf")
       }
     }
   }

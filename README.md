@@ -51,5 +51,4 @@ api.endpoint=posts
 download.maxposts=100
 download.directory=downloadedPosts
 download.overwrite=true
-log.directory=log
 ```

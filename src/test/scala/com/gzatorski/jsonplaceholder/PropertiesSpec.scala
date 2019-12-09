@@ -16,7 +16,6 @@ class PropertiesSpec extends Matchers with WordSpecLike {
       props.apiAddress should equal("jsonplaceholder.typicode.com")
       props.apiEndpoint should equal("posts")
       props.apiProtocol should equal("https")
-      props.logDirectory should equal("log")
       props.downloadMaxPosts should equal(100)
       props.downloadDirectory should equal("downloadedPosts")
 

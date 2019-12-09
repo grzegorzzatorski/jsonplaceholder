@@ -9,16 +9,20 @@ import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Sink, Source}
 import akka.util.ByteString
 import com.gzatorski.jsonplaceholder.model.{JsonParser, Post}
+import com.typesafe.scalalogging.LazyLogging
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class JSONPlaceholderClient(ac: ActorSystem) {
+class JSONPlaceholderClient(ac: ActorSystem) extends LazyLogging {
 
   implicit val actorSystem = ac
   implicit val materializer = ActorMaterializer()
 
   def getAllPosts(requestURL: String): Future[List[Post]] = {
     val httpRequest = HttpRequest(uri = requestURL)
+
+    logger.info(s"Making a request: ${httpRequest.toString()}")
 
     Http().singleRequest(httpRequest)
       .flatMap {
