@@ -1,5 +1,4 @@
-package com.gzatorski.jsonplaceholder
-
+package com.gzatorski.jsonplaceholder.client
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
@@ -8,30 +7,24 @@ import akka.http.scaladsl.model.{HttpRequest, HttpResponse}
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Sink, Source}
 import akka.util.ByteString
-import com.gzatorski.jsonplaceholder.model.{JsonParser, Post}
 import com.typesafe.scalalogging.LazyLogging
+import scala.concurrent.{ExecutionContext, Future}
 
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-
-class JSONPlaceholderClient(ac: ActorSystem) extends LazyLogging {
+class Client(ac: ActorSystem) extends LazyLogging {
 
   implicit val actorSystem: ActorSystem = ac
   implicit val materializer: ActorMaterializer = ActorMaterializer()
 
-  def getAllPosts(requestURL: String): Future[List[Post]] = {
-    val httpRequest = HttpRequest(uri = requestURL)
-
-    logger.info(s"Making a request: ${httpRequest.toString()}")
+  def performRequest(request: HttpRequest)(implicit ec: ExecutionContext): Future[String] = {
 
     val sink = Sink.fold[String, ByteString]("") { case (sum, byteStr) =>
       sum + byteStr.utf8String
     }
 
-    Http().singleRequest(httpRequest)
+    Http().singleRequest(request)
       .flatMap {
         extractData(_).runWith(sink)
-      }.map(JsonParser.getAsPosts)
+      }
   }
 
   private def extractData(response: HttpResponse): Source[ByteString, _] =

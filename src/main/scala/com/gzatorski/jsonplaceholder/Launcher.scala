@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
+import com.gzatorski.jsonplaceholder.client.PostsResourcesClient
 import com.gzatorski.jsonplaceholder.io.PostWriter
 import com.typesafe.scalalogging.LazyLogging
 
@@ -22,7 +23,7 @@ object Launcher extends LazyLogging {
     val properties = Properties("properties.conf")
     implicit val ac: ActorSystem = ActorSystem("json-placeholder")
 
-    val client = new JSONPlaceholderClient(ac)
+    val client = new PostsResourcesClient(ac)
 
     client.getAllPosts(properties.apiRequestAddress).andThen {
       case Success(value) =>
