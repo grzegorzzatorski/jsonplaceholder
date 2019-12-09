@@ -14,7 +14,7 @@ object PostWriter extends FileWriter with LazyLogging {
     posts.foreach { post =>
       val json = post.toJson
       val jsonPretty = json.prettyPrint
-      val writePath = s"$directory/${post.id}.json"
+      val writePath = s"$directory/posts/${post.id}.json"
 
       try {
         writeFile(writePath, jsonPretty, overwrite)
