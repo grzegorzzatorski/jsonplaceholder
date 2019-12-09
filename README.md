@@ -48,7 +48,6 @@ You can specify additional configuration file (everride default) which must be l
 api.protocol=https
 api.address=jsonplaceholder.typicode.com
 api.endpoint=posts
-download.maxposts=100
 download.directory=downloadedPosts
 download.overwrite=true
 ```

@@ -11,7 +11,6 @@ class Properties(config: Config) {
   val apiEndpoint: String = config.getString("api.endpoint")
   val apiRequestAddress = s"${clean(apiProtocol)}://${clean(apiAddress)}/${clean(apiEndpoint)}"
 
-  val downloadMaxPosts: Int = config.getInt("download.maxposts")
   val downloadDirectory: String = config.getString("download.directory")
   val filesOverwite: Boolean = config.getBoolean("download.overwrite")
 
