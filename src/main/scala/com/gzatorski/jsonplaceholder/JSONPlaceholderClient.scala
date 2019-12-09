@@ -24,12 +24,14 @@ class JSONPlaceholderClient(ac: ActorSystem) extends LazyLogging {
 
     logger.info(s"Making a request: ${httpRequest.toString()}")
 
+    val sink = Sink.fold[String, ByteString]("") { case (sum, byteStr) =>
+      sum + byteStr.utf8String
+    }
+
     Http().singleRequest(httpRequest)
       .flatMap {
-        extractData(_).runWith(Sink.head)
-      }
-      .map(_.utf8String)
-      .map(JsonParser.getAsPosts)
+        extractData(_).runWith(sink)
+      }.map(JsonParser.getAsPosts)
   }
 
   private def extractData(response: HttpResponse): Source[ByteString, _] =
