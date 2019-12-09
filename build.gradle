@@ -5,6 +5,10 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '2.0.1'
 }
 
+ext {
+    scalaVersion = "2.12"
+}
+
 shadowJar {
   manifest {
     attributes 'Main-Class': 'com.gzatorski.jsonplaceholder.Launcher'
@@ -13,17 +17,17 @@ shadowJar {
 }
 
 dependencies {
-    compile 'org.scala-lang:scala-library:2.11.8'
-    compile group: 'com.typesafe', name: 'config', version: '1.4.0'
-    compile group: 'com.typesafe.akka', name: 'akka-http_2.11', version: '10.1.11'
-    compile group: 'com.typesafe.akka', name: 'akka-actor_2.11', version: '2.5.26'
-    compile group: 'com.typesafe.akka', name: 'akka-stream_2.11', version: '2.5.26'
-    compile group: 'com.typesafe.akka', name: 'akka-http-spray-json_2.11', version: '10.1.11'
-    compile group: 'com.typesafe.scala-logging', name: 'scala-logging_2.11', version: '3.9.2'
-    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.2'
-    testCompile 'org.scalatest:scalatest_2.11:3.0.4'
-    testRuntime 'org.pegdown:pegdown:1.4.2'
-    testRuntime 'org.scala-lang.modules:scala-xml_2.11:1.0.6'
+    compile "org.scala-lang:scala-library:${scalaVersion}"
+    compile "com.typesafe:config:1.4.0"
+    compile "com.typesafe.akka:akka-http_${scalaVersion}:10.1.11"
+    compile "com.typesafe.akka:akka-actor_${scalaVersion}:2.5.26"
+    compile "com.typesafe.akka:akka-stream_${scalaVersion}:2.5.26"
+    compile "com.typesafe.akka:akka-http-spray-json_${scalaVersion}:10.1.11"
+    compile "com.typesafe.scala-logging:scala-logging_${scalaVersion}:3.9.2"
+    compile "ch.qos.logback:logback-classic:1.1.2"
+    testCompile "org.scalatest:scalatest_${scalaVersion}:3.0.4"
+    testRuntime "org.pegdown:pegdown:1.4.2"
+    testRuntime "org.scala-lang.modules:scala-xml_${scalaVersion}:1.0.6"
 }
 
 repositories {

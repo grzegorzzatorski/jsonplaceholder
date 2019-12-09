@@ -10,6 +10,7 @@ object PostWriter extends FileWriter with LazyLogging {
 
   def writePosts(posts: List[Post], directory: String, overwrite: Boolean): Unit = {
     implicit val postFormat: RootJsonFormat[Post] = jsonFormat4(Post)
+
     posts.foreach { post =>
       val json = post.toJson
       val jsonPretty = json.prettyPrint
